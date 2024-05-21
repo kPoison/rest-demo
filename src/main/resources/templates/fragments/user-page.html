@@ -1,0 +1,24 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="user-info">
+    <div class="ps-2 pt-0 pb-1 bg-light">
+        <h1>User-information page</h1>
+    </div>
+    <div class="bg-body-tertiary p-2 pt-1 m-0 pe-4">
+
+        <div class="container-fluid border-start border-end rounded-top px-3 py-2 bg-body-secondary">
+            <h5 class="m-1">About user</h5>
+        </div>
+        <div class="p-3 border-top-0 border rounded-bottom bg-body">
+            <table class="table table-striped table-borderless border-top">
+                <thead>
+                <tr class="border-top border-bottom">
+                    <th scope="col">Id</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Roles</th>
+                </tr>
+                </thead>
+                <tbody id="table-user-info"></tbody>
+            </table>
+        </div>
+    </div>
+</th:block>

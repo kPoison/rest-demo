@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container-fluid p-0">
+    <div class="row vh-100">
+        <div class="col-xxl-2 p-0 bg-body">
+            <div th:replace="~{fragments/side-menu :: side-menu}"></div>
+        </div>
+        <div class="col p-4 bg-light">
+            <div class="ps-2 pt-0 pb-1 bg-light">
+                <h1>Admin panel</h1>
+                <div class="bg-body-tertiary p-2 pt-1 m-0 pe-4">
+                    <ul class="nav nav-tabs" id="admin-page-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active">Users table</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">New user</a>
+                        </li>
+                    </ul>
+                    <div id="admin-page-users-table" th:insert="~{fragments/admin-page :: users-table}"></div>
+                    <div id="admin-page-new-user" th:insert="~{fragments/admin-page :: new-user}" style="display: none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="edit-modal" class="modal fade" tabindex="-1" aria-labelledby="editLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editLabel">Edit user</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid text-center m-0">
+                        <div class="row g-3 justify-content-center">
+                            <div class="mb-3 m-3 col-6">
+                                <label for="edit-modal-id" class="form-label"><b>ID</b></label>
+                                <input type="text" class="form-control" id="edit-modal-id" readonly>
+                            </div>
+                            <div class="mb-3 m-3 col-6">
+                                <label for="edit-modal-username" classclass="form-label"><b>Username</b></label>
+                                <input type="text" class="form-control" id="edit-modal-username">
+                            </div>
+                            <div class="mb-3 m-3 col-6">
+                                <label for="edit-modal-email" classclass="form-label"><b>Email</b></label>
+                                <input type="email" class="form-control" id="edit-modal-email">
+                            </div>
+                            <div class="mb-3 m-3 col-6">
+                                <label for="edit-modal-password" classclass="form-label"><b>Password</b></label>
+                                <input type="password" class="form-control" id="edit-modal-password">
+                            </div>
+                            <div class="mb-3 m-3 col-6">
+                                <label for="edit-modal-role" classclass="form-label m-0"><b>Role</b></label>
+                                <select class="form-select form-select-sm" size="2" id="edit-modal-role">
+                                    <option selected value="1">USER</option>
+                                    <option value="2">ADMIN</option>
+                                </select>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="edit-modal-request">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="delete-modal" class="modal fade" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteLabel">Delete user</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div>
+                <div class="modal-body">
+                    <div class="container-fluid text-center border p-3">
+                        <fieldset disabled>
+                            <div class="row g-3 justify-content-center">
+                                <div class="mb-3 m-3 col-6">
+                                    <label class="form-label"><b>ID</b></label>
+                                    <input type="text" class="form-control" id="delete-modal-id">
+                                </div>
+                                <div class="mb-3 m-3 col-6">
+                                    <label class="form-label"><b>Username</b></label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="mb-3 m-3 col-6">
+                                    <label class="form-label"><b>Email</b></label>
+                                    <input type="email" class="form-control">
+                                </div>
+                                <div class="mb-3 m-3 col-6">
+                                    <label class="form-label"><b>Role</b></label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger" id="delete-modal-request">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>
